@@ -1,7 +1,5 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item",
+  "item.ashtonsmagicmod.wooden_staff": "Wooden Staff",
 
   "item.ashtonsmagicmod.dormant_wooden_staff": "Unbound Wooden Staff",
   "item.ashtonsmagicmod.magic_crystal": "Magic Crystal",
