@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ashtonsmagicmod:magic_crystal"
+    },
+    "X": [
+      {
+        "item": "ashtonsmagicmod:dormant_wooden_staff"
+      }
+    ]
+  },
+  "pattern": [
+    " #",
+    "X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ashtonsmagicmod:wooden_staff"
+  }
+}
