@@ -1,5 +1,7 @@
 package com.shakyturd.ashtonsmagicmod;
 
+import com.shakyturd.ashtonsmagicmod.item.ModCreativeModeTabs;
+import com.shakyturd.ashtonsmagicmod.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -46,7 +48,11 @@ public class AshtonsMagicMod {
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
 
-        // Register the item to a creative tab
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+
+
         modEventBus.addListener(this::addCreative);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
@@ -59,6 +65,10 @@ public class AshtonsMagicMod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS){
+            event.accept(ModItems.MAGIC_CRYSTAL);
+            event.accept(ModItems.EMPTY_WOODEN_STAFF);
+        }
 
     }
 
