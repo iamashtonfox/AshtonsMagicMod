@@ -1,6 +1,5 @@
 package com.shakyturd.ashtonsmagicmod.item.custom;
 
-import com.shakyturd.ashtonsmagicmod.entity.custom.MagicProjectileEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -14,11 +13,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class WoodenStaffItem extends Item {
-    public WoodenStaffItem(Properties properties){
+public class StaffOfBiomesItem extends Item {
+    public StaffOfBiomesItem(Properties properties){
         super(properties);
     }
 
+    //THIS IS JUST AN IDEA RIGHT NOW. BIOME STAFF WILL CHANGE PROJECTILE DEPENDING ON WHICH BIOME IS CAST IN. NEED BIOME TYPES FIELDS HERE
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack staff = player.getItemInHand(usedHand);
@@ -34,10 +34,18 @@ public class WoodenStaffItem extends Item {
         );
         player.getCooldowns().addCooldown(this,15);
         if(!level.isClientSide){
-            MagicProjectileEntity magicProjectile = new MagicProjectileEntity(player, level);
-//            Snowball magicProjectile = new Snowball(level, player); //placeholder until can make entity working
-            magicProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-            level.addFreshEntity(magicProjectile);
+//            MagicMissileEntity magicMissile = new MagicMissileEntity(level, player);
+            Snowball magicMissile = new Snowball(level, player); //placeholder until can make entity working
+            magicMissile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+            level.addFreshEntity(magicMissile);
+
+            //PSEUDOCODE FOR BIOME STAFF HERE
+            //switch types{
+            //  type= biome.oak_forest{
+            //      OakMagicProjectile projectile = new OakMagicProjectile(level, player);
+
+            // you get the idea
+
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));

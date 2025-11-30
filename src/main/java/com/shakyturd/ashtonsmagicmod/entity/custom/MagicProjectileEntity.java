@@ -1,0 +1,156 @@
+package com.shakyturd.ashtonsmagicmod.entity.custom;
+
+import com.shakyturd.ashtonsmagicmod.entity.ModEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+
+public class MagicProjectileEntity extends Projectile {
+
+    public enum MagicProjectileType {
+        BASE,
+        POISON
+    }
+
+    private static final EntityDataAccessor<Integer> TYPE =
+            SynchedEntityData.defineId(MagicProjectileEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> HIT =
+            SynchedEntityData.defineId(MagicProjectileEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> COUNT =
+            SynchedEntityData.defineId(MagicProjectileEntity.class, EntityDataSerializers.INT);
+
+
+    public MagicProjectileEntity(EntityType<? extends Projectile> entityType, Level level) {
+        super(entityType, level);
+    }
+
+    public MagicProjectileEntity(LivingEntity shooter, Level level) {
+        this(ModEntities.MAGICPROJECTILE.get(),level);
+        setOwner(shooter);
+        BlockPos pos = shooter.blockPosition();
+        double d0 = (double)pos.getX() + 0.5D;
+        double d1 = (double)pos.getY() + 1.75D;
+        double d2 = (double)pos.getZ() + 0.5D;
+        this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        this.entityData.set(TYPE, 0);
+        this.entityData.set(COUNT, 0);
+        this.entityData.set(HIT, false);
+    }
+
+    public void setType(MagicProjectileType type){
+        this.entityData.set(TYPE, type.ordinal());
+    }
+
+    public int getProjectileType() {
+        return this.entityData.get(TYPE);
+    }
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.entityData.get(HIT)){
+            this.entityData.set(COUNT, this.entityData.get(COUNT) + 1);
+            if(this.entityData.get(COUNT) >= 2){
+                this.destroy();
+            }
+        }
+        if(this.tickCount >= 75) {
+            this.remove(RemovalReason.DISCARDED);
+        }
+        Vec3 vec3 = this.getDeltaMovement();
+        HitResult res = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+        if(res.getType() != HitResult.Type.MISS) {
+            this.onHit(res);
+        }
+        double d0 = this.getX() + vec3.x;
+        double d1 = this.getY() + vec3.y;
+        double d2 = this.getZ() + vec3.z;
+        this.updateRotation();
+
+        double d5 = vec3.x;
+        double d6 = vec3.y;
+        double d7 = vec3.z;
+
+        if(this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir)){
+            this.discard();
+        } else if (this.isInWaterOrBubble()) {
+            this.discard();
+        } else{
+            this.setDeltaMovement(vec3.scale(0.95F));
+            this.setPos(d0, d1, d2);
+        }
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
+        Entity hitEntity = result.getEntity();
+        Entity owner = this.getOwner();
+
+        if(hitEntity == owner && this.level().isClientSide()) {
+            return;
+        }
+
+        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ARMOR_STAND_BREAK, SoundSource.NEUTRAL, 2F, 1F);
+
+        LivingEntity livent = owner instanceof LivingEntity ? (LivingEntity)owner : null;
+        float damage = 8f;
+        boolean hurt = hitEntity.hurt(this.damageSources().mobProjectile(this, livent), damage);
+
+        if(hurt) {
+            if(this.entityData.get(TYPE) == 1) {
+                if(hitEntity instanceof LivingEntity livingHitEntity) {
+                    livingHitEntity.addEffect(new MobEffectInstance(MobEffects.POISON,3), owner);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onHit(HitResult result) {
+        super.onHit(result);
+
+
+        if(this.level().isClientSide()) {
+            return;
+        }
+
+        if(result.getType() == HitResult.Type.ENTITY && result instanceof EntityHitResult entityHitResult) {
+            Entity hit = entityHitResult.getEntity();
+            Entity owner = this.getOwner();
+            if(owner != hit) {
+                this.entityData.set(HIT, true);
+            }
+        }else{
+            this.entityData.set(HIT, true);
+        }
+    }
+
+    public void destroy() {
+        this.discard();
+        this.level().gameEvent(GameEvent.ENTITY_DAMAGE, this.position(), GameEvent.Context.of(this));
+    }
+}
