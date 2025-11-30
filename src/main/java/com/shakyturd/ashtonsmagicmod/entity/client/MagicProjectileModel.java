@@ -14,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 
 public class MagicProjectileModel extends EntityModel<MagicProjectileEntity> {
     public static final ModelLayerLocation LAYER_LOCATION =
-            new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AshtonsMagicMod.MOD_ID, "magick"), "main");
+            new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AshtonsMagicMod.MOD_ID, "magic_projectile"), "main");
     private final ModelPart magic_projectile;
 
     public MagicProjectileModel(ModelPart root) {
