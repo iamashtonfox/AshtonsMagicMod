@@ -37,6 +37,7 @@ public class AshtonsMagicMod {
         ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
 
 
         modEventBus.addListener(this::addCreative);
@@ -45,7 +46,7 @@ public class AshtonsMagicMod {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event) {
 
     }
 
@@ -64,7 +65,6 @@ public class AshtonsMagicMod {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
-
             EntityRenderers.register(ModEntities.MAGICPROJECTILE.get(), MagicProjectileRenderer::new);
         }
     }

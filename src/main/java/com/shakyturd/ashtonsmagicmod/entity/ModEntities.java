@@ -5,6 +5,7 @@ import com.shakyturd.ashtonsmagicmod.entity.custom.MagicProjectileEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -16,4 +17,8 @@ public class ModEntities {
     public static final Supplier<EntityType<MagicProjectileEntity>> MAGICPROJECTILE =
             ENTITY_TYPES.register("magic_projectile", () -> EntityType.Builder.<MagicProjectileEntity>of(MagicProjectileEntity::new, MobCategory.MISC)
                     .sized(0.5f, 1.15f).build("magic_projectile"));
+
+    public static void register(IEventBus eventBus) {
+        ENTITY_TYPES.register(eventBus);
+    }
 }
