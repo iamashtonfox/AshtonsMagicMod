@@ -37,7 +37,7 @@ public class MagicProjectileModel extends EntityModel<MagicProjectileEntity> {
 
         PartDefinition cube_r5 = magic_projectile.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(18, 1).addBox(-0.5F, -9.0F, -0.5F, 1.0F, 18.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.5F, 0.0F, 0.0F, -0.7854F, 0.0F));
 
-        return LayerDefinition.create(meshdefinition, 32, 32);
+        return LayerDefinition.create(meshdefinition, 16, 16);
     }
 
     @Override

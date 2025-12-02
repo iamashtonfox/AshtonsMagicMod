@@ -1,6 +1,7 @@
 package com.shakyturd.ashtonsmagicmod.entity.custom;
 
 import com.shakyturd.ashtonsmagicmod.entity.ModEntities;
+import com.shakyturd.ashtonsmagicmod.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -12,7 +13,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
@@ -42,22 +43,18 @@ public class MagicProjectileEntity extends Projectile {
         super(entityType, level);
     }
 
+
     public MagicProjectileEntity(LivingEntity shooter, Level level) {
-        this(ModEntities.MAGICPROJECTILE.get(),level);
-        setOwner(shooter);
+        this(ModEntities.MAGICPROJECTILE.get(), level);
+        this.setOwner(shooter);
         BlockPos pos = shooter.blockPosition();
-        double d0 = (double)pos.getX() + 0.5D;
-        double d1 = (double)pos.getY() + 1.75D;
-        double d2 = (double)pos.getZ() + 0.5D;
+        double d0 = (double)pos.getX() + 0.75D;
+        double d1 = (double)pos.getY() + 0.5D;
+        double d2 = (double)pos.getZ() + 0.25D;
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
 
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        this.entityData.set(TYPE, 0);
-        this.entityData.set(COUNT, 0);
-        this.entityData.set(HIT, false);
-    }
+
 
     public void setType(MagicProjectileType type){
         this.entityData.set(TYPE, type.ordinal());
@@ -77,7 +74,7 @@ public class MagicProjectileEntity extends Projectile {
                 this.destroy();
             }
         }
-        if(this.tickCount >= 75) {
+        if(this.tickCount >= 15) {
             this.remove(RemovalReason.DISCARDED);
         }
         Vec3 vec3 = this.getDeltaMovement();
@@ -96,10 +93,8 @@ public class MagicProjectileEntity extends Projectile {
 
         if(this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir)){
             this.discard();
-        } else if (this.isInWaterOrBubble()) {
-            this.discard();
         } else{
-            this.setDeltaMovement(vec3.scale(0.95F));
+            this.setDeltaMovement(vec3.scale(1.0F));
             this.setPos(d0, d1, d2);
         }
     }
@@ -149,6 +144,12 @@ public class MagicProjectileEntity extends Projectile {
         }
     }
 
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(TYPE, 0);
+        builder.define(HIT, false);
+        builder.define(COUNT, 0);
+    }
     public void destroy() {
         this.discard();
         this.level().gameEvent(GameEvent.ENTITY_DAMAGE, this.position(), GameEvent.Context.of(this));

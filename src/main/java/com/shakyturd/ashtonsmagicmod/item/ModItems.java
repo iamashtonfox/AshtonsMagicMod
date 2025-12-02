@@ -1,7 +1,6 @@
 package com.shakyturd.ashtonsmagicmod.item;
 
 import com.shakyturd.ashtonsmagicmod.AshtonsMagicMod;
-import com.shakyturd.ashtonsmagicmod.item.custom.MagicProjectileItem;
 import com.shakyturd.ashtonsmagicmod.item.custom.WoodenStaffItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -20,8 +19,6 @@ public class ModItems {
     public static final DeferredItem<Item> WOODEN_STAFF = ITEMS.register("wooden_staff",
             () -> new WoodenStaffItem(new Item.Properties().durability(128)));
 
-//    public static final DeferredItem<Item> MAGIC_PROJECTILE = ITEMS.register("magic_projectile",
-//            () -> new MagicProjectileItem(new Item.Properties().stacksTo(8)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
