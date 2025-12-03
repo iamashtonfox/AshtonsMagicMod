@@ -64,6 +64,15 @@ public class MagicProjectileEntity extends Projectile {
         return this.entityData.get(TYPE);
     }
 
+    @Override //trying to fix the projectile displacement when shooting with x/y-axis movement
+    public Vec3 getMovementToShoot(double x, double y, double z, float velocity, float inaccuracy) {
+        return new Vec3(x, y, z).normalize()
+                .add(
+                        this.random.triangle(0.0,0.0),
+                        this.random.triangle(0.0,0.0),
+                        this.random.triangle(0.0,0.0)
+                ).scale((double)velocity);
+    }
 
     @Override
     public void tick() {
@@ -93,6 +102,9 @@ public class MagicProjectileEntity extends Projectile {
 
         if(this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir)){
             this.discard();
+        }else if(this.isInWaterOrBubble()) {
+            this.setDeltaMovement(vec3.scale(1.0F));
+            this.setPos(d0, d1, d2);
         } else{
             this.setDeltaMovement(vec3.scale(1.0F));
             this.setPos(d0, d1, d2);
