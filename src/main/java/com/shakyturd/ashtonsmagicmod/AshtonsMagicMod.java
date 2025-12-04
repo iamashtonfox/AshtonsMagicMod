@@ -29,6 +29,10 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 //TODO manaphite-magicCrystal purifier block entity which enhances magic crystal using manaphite
 //TODO manaphite enchanced crystals are more potent in damage, durability on slotted weapons, and elemental/biome-based damage
 
+//TODO add biome-speicific magic crystals
+
+//TODO figure out how to generalize magic crystals under one tag; make blanket magic projectile entity to act as foundational entity
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(AshtonsMagicMod.MOD_ID)
 public class AshtonsMagicMod {
