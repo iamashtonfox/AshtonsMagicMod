@@ -1,8 +1,10 @@
 {
-  "item.ashtonsmagicmod.wooden_staff": "Wooden Staff",
-
   "item.ashtonsmagicmod.dormant_wooden_staff": "Unbound Wooden Staff",
   "item.ashtonsmagicmod.magic_crystal": "Magic Crystal",
+  "item.ashtonsmagicmod.wooden_staff": "Wooden Staff",
+  "item.ashtonsmagicmod.manaphite": "Manaphite",
+
+  "block.ashtonsmagicmod.manaphite_ore": "Manaphite Ore",
 
   "creativetab.ashtonsmagicmod.magic_items": "Magic Items"
 }

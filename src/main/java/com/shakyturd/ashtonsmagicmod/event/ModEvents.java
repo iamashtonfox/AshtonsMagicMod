@@ -24,7 +24,7 @@ public class ModEvents {
                 player.getMainHandItem().hurtAndBreak(1000, player, player.getEquipmentSlotForItem(player.getMainHandItem()));
 //                player.playSound(SoundEvents.ITEM_PICKUP);
                 player.addItem(ModItems.MAGIC_CRYSTAL.toStack());
-
+                //TODO create an invisible entity that instantly dies and always drops a magic crystal to give the effect of the crystal "falling out" of the staff as it breaks
             }
         }
     }

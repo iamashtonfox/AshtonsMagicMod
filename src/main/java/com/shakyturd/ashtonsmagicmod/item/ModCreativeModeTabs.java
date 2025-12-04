@@ -1,6 +1,7 @@
 package com.shakyturd.ashtonsmagicmod.item;
 
 import com.shakyturd.ashtonsmagicmod.AshtonsMagicMod;
+import com.shakyturd.ashtonsmagicmod.block.ModBlocks;
 import com.shakyturd.ashtonsmagicmod.item.custom.WoodenStaffItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.MAGIC_CRYSTAL);
                         output.accept(ModItems.EMPTY_WOODEN_STAFF);
                         output.accept(ModItems.WOODEN_STAFF);
+                        output.accept(ModItems.MANAPHITE);
+                        output.accept(ModBlocks.MANAPHITE_ORE);
                     }).build());
 
 
