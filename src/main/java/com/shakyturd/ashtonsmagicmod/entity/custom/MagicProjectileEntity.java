@@ -24,7 +24,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class MagicProjectileEntity extends Projectile {
+public class MagicProjectileEntity extends Projectile { //TODO known issue: places the entity in the middle of the block the player is standing on, instead of the exact player position
 
     public enum MagicProjectileType {
         BASE,

@@ -31,6 +31,18 @@ public class ModBlocks {
             )
     );
 
+    public static final DeferredBlock<Block> MANAPHITE_DEEPSLATE_ORE = registerBlock( //TODO on the assets/models/block/manaphite_deepslate_ore.json, make the top face of the block look cool
+            "manaphite_deepslate_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(7.5f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+                    .explosionResistance(1000)
+                    .friction(0.7f)
+                    .mapColor(MapColor.ICE)
+            )
+    );
+
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name,block);

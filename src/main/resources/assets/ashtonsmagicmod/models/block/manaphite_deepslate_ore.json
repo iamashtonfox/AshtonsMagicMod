@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "ashtonsmagicmod:block/manaphite_deepslate_ore"
+  }
+}

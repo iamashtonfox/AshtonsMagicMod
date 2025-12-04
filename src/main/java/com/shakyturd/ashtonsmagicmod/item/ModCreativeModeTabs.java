@@ -25,6 +25,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.WOODEN_STAFF);
                         output.accept(ModItems.MANAPHITE);
                         output.accept(ModBlocks.MANAPHITE_ORE);
+                        output.accept(ModBlocks.MANAPHITE_DEEPSLATE_ORE);
                     }).build());
 
 
