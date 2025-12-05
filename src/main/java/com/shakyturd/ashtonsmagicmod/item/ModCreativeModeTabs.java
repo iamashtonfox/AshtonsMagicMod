@@ -2,7 +2,6 @@ package com.shakyturd.ashtonsmagicmod.item;
 
 import com.shakyturd.ashtonsmagicmod.AshtonsMagicMod;
 import com.shakyturd.ashtonsmagicmod.block.ModBlocks;
-import com.shakyturd.ashtonsmagicmod.item.custom.WoodenStaffItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -17,10 +16,10 @@ public class ModCreativeModeTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AshtonsMagicMod.MOD_ID);
 
     public static final Supplier<CreativeModeTab> MAGIC_MOD_TAB = CREATIVE_MODE_TAB.register("magic_items_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.MAGIC_CRYSTAL.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ARCANE_CRYSTAL.get()))
                     .title(Component.translatable("creativetab.ashtonsmagicmod.magic_items"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModItems.MAGIC_CRYSTAL);
+                        output.accept(ModItems.ARCANE_CRYSTAL);
                         output.accept(ModItems.EMPTY_WOODEN_STAFF);
                         output.accept(ModItems.WOODEN_STAFF);
                         output.accept(ModItems.MANAPHITE);

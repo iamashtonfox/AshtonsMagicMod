@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ashtonsmagicmod:item/magic_crystal"
+    "layer0": "ashtonsmagicmod:item/arcane_crystal"
   }
 }

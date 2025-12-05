@@ -2,27 +2,50 @@ package com.shakyturd.ashtonsmagicmod.item;
 
 import com.shakyturd.ashtonsmagicmod.AshtonsMagicMod;
 import com.shakyturd.ashtonsmagicmod.item.custom.WoodenStaffItem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.List;
+
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AshtonsMagicMod.MOD_ID);
 
-    public static final DeferredItem<Item> MAGIC_CRYSTAL = ITEMS.register("magic_crystal", //TODO if the crystal catches fire, destroy the item and release some experience orbs
+    public static final DeferredItem<Item> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", //TODO if the crystal catches fire, destroy the item and release some experience orbs
             () -> new Item(new Item.Properties()                                                 //TODO probably need to make the magic crystal a custom item instead of just a deffered item
                     .fireResistant()
-                    .rarity(Rarity.UNCOMMON)));
+                    .rarity(Rarity.UNCOMMON)){
+                @Override
+                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.arcane_crystal.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
 
     public static final DeferredItem<Item> EMPTY_WOODEN_STAFF = ITEMS.register("dormant_wooden_staff",
-            () -> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties()){
+                @Override
+                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.dormant_wooden_staff.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
 
     public static final DeferredItem<Item> MANAPHITE = ITEMS.register("manaphite",
             () -> new Item(new Item.Properties()
                     .rarity(Rarity.RARE)
-                    .fireResistant()));
+                    .fireResistant()){
+                @Override
+                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.manaphite.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
 
     public static final DeferredItem<Item> WOODEN_STAFF = ITEMS.register("wooden_staff",
             () -> new WoodenStaffItem(new Item.Properties()

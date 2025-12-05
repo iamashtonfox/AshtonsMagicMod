@@ -1,6 +1,8 @@
 package com.shakyturd.ashtonsmagicmod.item.custom;
 
 import com.shakyturd.ashtonsmagicmod.entity.custom.MagicProjectileEntity;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -12,7 +14,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 
 public class WoodenStaffItem extends Item {
@@ -47,6 +52,19 @@ public class WoodenStaffItem extends Item {
 
 
 
+
         return InteractionResultHolder.sidedSuccess(staff, level.isClientSide());
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        if(Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.wooden_staff"));
+        }else{
+            tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.wooden_staff.shift_down"));
+
+        }
+
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }
