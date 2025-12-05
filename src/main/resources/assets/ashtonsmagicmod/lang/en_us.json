@@ -1,5 +1,6 @@
 {
   "item.ashtonsmagicmod.dormant_wooden_staff": "Unbound Wooden Staff",
+  "item.ashtonsmagicmod.arcane_essence": "Arcane Essence",
   "item.ashtonsmagicmod.arcane_crystal": "Arcane Crystal",
   "item.ashtonsmagicmod.wooden_staff": "Wooden Staff",
   "item.ashtonsmagicmod.manaphite": "Manaphite",
@@ -7,7 +8,8 @@
   "block.ashtonsmagicmod.manaphite_ore": "Manaphite Ore",
   "block.ashtonsmagicmod.manaphite_deepslate_ore": "Deepslate Manaphite Ore",
 
-  "tooltip.ashtonsmagicmod.arcane_crystal.tooltip": "Raw manifestation of the §b§llife energy§r of a living being",
+  "tooltip.ashtonsmagicmod.arcane_crystal.tooltip": "Refined life energy, able to manifest powerful energy",
+  "tooltip.ashtonsmagicmod.arcane_essence.tooltip": "Raw manifestation of the §b§llife energy§r of a living being",
   "tooltip.ashtonsmagicmod.manaphite.tooltip": "You can sense §b§opowerful energies§r when you hold it...",
   "tooltip.ashtonsmagicmod.dormant_wooden_staff.tooltip": "A finely-carved staff made to unleash magical energy",
   "tooltip.ashtonsmagicmod.wooden_staff": "A wooden staff affixed with a magical crystal. \n\n§l§4High amounts of magical energy render the staff extremely fragile...",

@@ -24,14 +24,14 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 //TODO manaphite refinery block entity which creates refined manaphite (essentially ingots) to create manaphite armor
-//TODO manaphite armor set bonus: extra cast seped on magic weapons
+//TODO manaphite armor set bonus: extra cast speed on magic weapons
 
-//TODO manaphite-magicCrystal purifier block entity which enhances magic crystal using manaphite
-//TODO manaphite enchanced crystals are more potent in damage, durability on slotted weapons, and elemental/biome-based damage
+//TODO manaphite-magicEssence purifier block entity which turns magic essence into magic crystals using manaphite
+//TODO magic crystals able to be slotted onto staves
 
 //TODO add biome-speicific magic crystals
 
-//TODO figure out how to generalize magic crystals under one tag; make blanket magic projectile entity to act as foundational entity
+//TODO make blanket magic projectile entity to act as foundational entity
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(AshtonsMagicMod.MOD_ID)

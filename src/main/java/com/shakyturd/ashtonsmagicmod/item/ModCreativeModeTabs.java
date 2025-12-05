@@ -16,9 +16,10 @@ public class ModCreativeModeTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AshtonsMagicMod.MOD_ID);
 
     public static final Supplier<CreativeModeTab> MAGIC_MOD_TAB = CREATIVE_MODE_TAB.register("magic_items_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ARCANE_CRYSTAL.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ARCANE_ESSENCE.get()))
                     .title(Component.translatable("creativetab.ashtonsmagicmod.magic_items"))
                     .displayItems((itemDisplayParameters, output) -> {
+                        output.accept(ModItems.ARCANE_ESSENCE);
                         output.accept(ModItems.ARCANE_CRYSTAL);
                         output.accept(ModItems.EMPTY_WOODEN_STAFF);
                         output.accept(ModItems.WOODEN_STAFF);

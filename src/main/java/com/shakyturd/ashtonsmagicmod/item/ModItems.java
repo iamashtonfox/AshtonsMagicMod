@@ -16,10 +16,21 @@ import java.util.List;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AshtonsMagicMod.MOD_ID);
 
-    public static final DeferredItem<Item> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", //TODO if the crystal catches fire, destroy the item and release some experience orbs
-            () -> new Item(new Item.Properties()                                                 //TODO probably need to make the magic crystal a custom item instead of just a deffered item
+    public static final DeferredItem<Item> ARCANE_ESSENCE = ITEMS.register("arcane_essence", //TODO if the essence catches fire, destroy the item and release some experience orbs
+            () -> new Item(new Item.Properties()                                                 //TODO probably need to make the magic essence a custom item instead of just a deffered item
                     .fireResistant()
                     .rarity(Rarity.UNCOMMON)){
+                @Override
+                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.arcane_essence.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
+
+    public static final DeferredItem<Item> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal",
+            () -> new Item(new Item.Properties()
+                    .fireResistant()
+                    .rarity(Rarity.EPIC)){
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.arcane_crystal.tooltip"));
