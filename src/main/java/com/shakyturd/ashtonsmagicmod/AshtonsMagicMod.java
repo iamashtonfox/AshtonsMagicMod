@@ -33,6 +33,8 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 //TODO make blanket magic projectile entity to act as foundational entity
 
+//TODO make equipped staves render in-hand the same way swords are
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(AshtonsMagicMod.MOD_ID)
 public class AshtonsMagicMod {

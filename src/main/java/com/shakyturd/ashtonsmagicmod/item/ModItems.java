@@ -39,7 +39,8 @@ public class ModItems {
             });
 
     public static final DeferredItem<Item> EMPTY_WOODEN_STAFF = ITEMS.register("dormant_wooden_staff",
-            () -> new Item(new Item.Properties()){
+            () -> new Item(new Item.Properties()
+                    .stacksTo(1)){
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.dormant_wooden_staff.tooltip"));
