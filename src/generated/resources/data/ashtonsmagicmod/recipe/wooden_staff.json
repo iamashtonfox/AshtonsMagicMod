@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ashtonsmagicmod:arcane_crystal"
+    },
+    "S": {
+      "item": "ashtonsmagicmod:wooden_staff"
+    }
+  },
+  "pattern": [
+    " #",
+    "S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ashtonsmagicmod:wooden_staff"
+  }
+}

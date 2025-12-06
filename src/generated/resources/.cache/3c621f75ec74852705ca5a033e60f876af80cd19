@@ -1,0 +1,4 @@
+// 1.21	2025-12-05T21:59:09.4075253	Tags for minecraft:block mod id ashtonsmagicmod
+e9b57437728f011907c8d201af27c0ad9915f70a data/minecraft/tags/block/mineable/pickaxe.json
+be77ba5011923960aa529ff58ec117b6cab95c6a data/minecraft/tags/block/needs_diamond_tool.json
+904d4388f29cb55322ab7b707854060d50e11f63 data/minecraft/tags/block/needs_iron_tool.json

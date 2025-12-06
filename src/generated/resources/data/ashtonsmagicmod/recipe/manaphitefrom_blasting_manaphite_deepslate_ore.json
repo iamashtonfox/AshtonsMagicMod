@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "group": "manaphite",
+  "ingredient": {
+    "item": "ashtonsmagicmod:manaphite_deepslate_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "ashtonsmagicmod:manaphite"
+  }
+}

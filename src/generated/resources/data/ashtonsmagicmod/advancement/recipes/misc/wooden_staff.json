@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arcane_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ashtonsmagicmod:arcane_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ashtonsmagicmod:wooden_staff"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_arcane_crystal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ashtonsmagicmod:wooden_staff"
+    ]
+  }
+}
