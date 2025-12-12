@@ -48,9 +48,9 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         this(ModEntities.MAGICPROJECTILE.get(), level);
         this.setOwner(shooter);
         BlockPos pos = shooter.blockPosition();
-        double d0 = (double)pos.getX() + 0.75D;
+        double d0 = (double)pos.getX();
         double d1 = (double)pos.getY() + 0.5D;
-        double d2 = (double)pos.getZ() + 0.25D;
+        double d2 = (double)pos.getZ();
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
 
@@ -87,6 +87,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
             this.remove(RemovalReason.DISCARDED);
         }
         Vec3 vec3 = this.getDeltaMovement();
+
         HitResult res = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
         if(res.getType() != HitResult.Type.MISS) {
             this.onHit(res);
@@ -100,7 +101,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         double d6 = vec3.y;
         double d7 = vec3.z;
 
-        if(this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir)){
+        if(this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir) && !this.isInWaterOrBubble()){
             this.discard();
         }else if(this.isInWaterOrBubble()) {
             this.setDeltaMovement(vec3.scale(1.0F));
@@ -121,7 +122,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
             return;
         }
 
-        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ARMOR_STAND_BREAK, SoundSource.NEUTRAL, 2F, 1F);
+        this.getOwner().playSound(SoundEvents.ARMOR_STAND_BREAK, 2F, 1F);
 
         LivingEntity livent = owner instanceof LivingEntity ? (LivingEntity)owner : null;
         float damage = 8f;

@@ -26,6 +26,8 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 //TODO manaphite refinery block entity which creates refined manaphite (essentially ingots) to create manaphite armor
 //TODO manaphite armor set bonus: extra cast speed on magic weapons
 
+//TODO manaphite ore gen in deep dark?
+
 //TODO manaphite-magicEssence purifier block entity which turns magic essence into magic crystals using manaphite
 //TODO magic crystals able to be slotted onto staves
 
