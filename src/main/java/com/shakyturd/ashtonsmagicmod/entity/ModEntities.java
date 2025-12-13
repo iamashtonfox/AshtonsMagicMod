@@ -16,7 +16,7 @@ public class ModEntities {
 
     public static final Supplier<EntityType<MagicProjectileEntity>> MAGICPROJECTILE =
             ENTITY_TYPES.register("magic_projectile", () -> EntityType.Builder.<MagicProjectileEntity>of(MagicProjectileEntity::new, MobCategory.MISC)
-                    .sized(0.5f, 1.15f).build("magic_projectile"));
+                    .sized(0.6f, 0.6f).build("magic_projectile"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

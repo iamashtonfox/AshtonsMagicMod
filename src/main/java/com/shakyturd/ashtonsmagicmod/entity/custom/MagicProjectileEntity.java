@@ -49,7 +49,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         this.setOwner(shooter);
         BlockPos pos = shooter.blockPosition();
         double d0 = shooter.getX();
-        double d1 = shooter.getY() + 0.5D;
+        double d1 = shooter.getY() + 0.75D;
         double d2 = shooter.getZ();
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
@@ -77,7 +77,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
     @Override
     public void tick() {
         super.tick();
-        if(this.entityData.get(HIT)){
+        if(this.entityData.get(HIT)){ //this is not working for some reason :/
             this.entityData.set(COUNT, this.entityData.get(COUNT) + 1);
             if(this.entityData.get(COUNT) >= 2){
                 this.destroy();
