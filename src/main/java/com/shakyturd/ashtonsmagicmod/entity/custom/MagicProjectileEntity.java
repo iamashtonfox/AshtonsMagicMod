@@ -48,9 +48,9 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         this(ModEntities.MAGICPROJECTILE.get(), level);
         this.setOwner(shooter);
         BlockPos pos = shooter.blockPosition();
-        double d0 = (double)pos.getX();
+        double d0 = this.getX(); //pos.getX returns an int, need to figure out the double version of this getter // this spawns the thing at 0,0 lol
         double d1 = (double)pos.getY() + 0.5D;
-        double d2 = (double)pos.getZ();
+        double d2 = this.getZ();
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
 
