@@ -77,7 +77,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         super.tick();
         if(this.entityData.get(HIT)){ //this is not working properly for some reason :/
             this.entityData.set(COUNT, this.entityData.get(COUNT) + 1);
-            this.entityData.set(DAMAGE, this.entityData.get(DAMAGE) - 2);
+            this.entityData.set(DAMAGE, this.entityData.get(DAMAGE) / 2);
             if(this.entityData.get(COUNT) >= 2){
                 this.destroy();
             }
