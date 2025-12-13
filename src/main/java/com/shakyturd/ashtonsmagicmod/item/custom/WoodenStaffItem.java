@@ -62,7 +62,6 @@ public class WoodenStaffItem extends Item {
             tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.wooden_staff"));
         }else{
             tooltipComponents.add(Component.translatable("tooltip.ashtonsmagicmod.wooden_staff.shift_down"));
-
         }
 
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);

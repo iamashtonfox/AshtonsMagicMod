@@ -1,22 +1,18 @@
 package com.shakyturd.ashtonsmagicmod.entity.custom;
 
 import com.shakyturd.ashtonsmagicmod.entity.ModEntities;
-import com.shakyturd.ashtonsmagicmod.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -37,6 +33,8 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
             SynchedEntityData.defineId(MagicProjectileEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> COUNT =
             SynchedEntityData.defineId(MagicProjectileEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> DAMAGE =
+            SynchedEntityData.defineId(MagicProjectileEntity.class, EntityDataSerializers.FLOAT);
 
 
     public MagicProjectileEntity(EntityType<? extends Projectile> entityType, Level level) {
@@ -49,7 +47,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         this.setOwner(shooter);
         BlockPos pos = shooter.blockPosition();
         double d0 = shooter.getX();
-        double d1 = shooter.getY() + 0.75D;
+        double d1 = shooter.getEyeY() -0.3F;
         double d2 = shooter.getZ();
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
@@ -77,11 +75,13 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
     @Override
     public void tick() {
         super.tick();
-        if(this.entityData.get(HIT)){ //this is not working for some reason :/
+        if(this.entityData.get(HIT)){ //this is not working properly for some reason :/
             this.entityData.set(COUNT, this.entityData.get(COUNT) + 1);
+            this.entityData.set(DAMAGE, this.entityData.get(DAMAGE) - 2);
             if(this.entityData.get(COUNT) >= 2){
                 this.destroy();
             }
+            this.entityData.set(HIT, false);
         }
         if(this.tickCount >= 15) {
             this.remove(RemovalReason.DISCARDED);
@@ -101,6 +101,8 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         double d6 = vec3.y;
         double d7 = vec3.z;
 
+
+        //TODO be able to shoot through leaves? (maybe even other semi-permeable blocks?)
         if(this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir) && !this.isInWaterOrBubble()){
             this.discard();
         }else if(this.isInWaterOrBubble()) {
@@ -122,11 +124,11 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
             return;
         }
 
+        //TODO: make this sound not play when hitting an enderman
         this.getOwner().playSound(SoundEvents.ARMOR_STAND_BREAK, 2F, 1F);
 
         LivingEntity livent = owner instanceof LivingEntity ? (LivingEntity)owner : null;
-        float damage = 8f;
-        boolean hurt = hitEntity.hurt(this.damageSources().mobProjectile(this, livent), damage);
+        boolean hurt = hitEntity.hurt(this.damageSources().mobProjectile(this, livent), this.entityData.get(DAMAGE));
 
         if(hurt) {
             if(this.entityData.get(TYPE) == 1) {
@@ -153,7 +155,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
                 this.entityData.set(HIT, true);
             }
         }else{
-            this.entityData.set(HIT, true);
+            this.entityData.set(HIT, false);
         }
     }
 
@@ -162,6 +164,7 @@ public class MagicProjectileEntity extends Projectile { //TODO known issue: plac
         builder.define(TYPE, 0);
         builder.define(HIT, false);
         builder.define(COUNT, 0);
+        builder.define(DAMAGE, 8f);
     }
     public void destroy() {
         this.discard();
