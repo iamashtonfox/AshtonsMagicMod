@@ -40,12 +40,10 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(AshtonsMagicMod.MOD_ID)
 public class AshtonsMagicMod {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "ashtonsmagicmod";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AshtonsMagicMod(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
 
@@ -58,7 +56,6 @@ public class AshtonsMagicMod {
 
         modEventBus.addListener(this::addCreative);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
@@ -66,7 +63,6 @@ public class AshtonsMagicMod {
 
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
     }
 

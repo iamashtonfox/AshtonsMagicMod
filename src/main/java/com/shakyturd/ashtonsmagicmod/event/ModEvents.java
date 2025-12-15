@@ -15,14 +15,14 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void livingDamage(LivingDamageEvent.Pre event) { //whenever you hit any entity with a wand, instantly break the wand and refund the crystal
-        if (event.getEntity() instanceof LivingEntity entity && event.getSource().getDirectEntity() instanceof Player player) {
-            if(player.getAbilities().instabuild){
+        if (event.getEntity() instanceof LivingEntity livingEntity && event.getSource().getDirectEntity() instanceof Player player) {
+            if(!player.getAbilities().instabuild){
                 if (player.getMainHandItem().getItem() == ModItems.WOODEN_STAFF.get()) {
                     Level level;
                     player.playSound(SoundEvents.ITEM_BREAK);
                     player.getMainHandItem().hurtAndBreak(1000, player, player.getEquipmentSlotForItem(player.getMainHandItem()));
     //                player.playSound(SoundEvents.ITEM_PICKUP);
-                    player.addItem(ModItems.ARCANE_ESSENCE.toStack());
+                    player.addItem(ModItems.ARCANE_CRYSTAL.toStack());
                     //TODO create an invisible entity that instantly dies and always drops a magic crystal to give the effect of the crystal "falling out" of the staff as it breaks
                 }
             }
