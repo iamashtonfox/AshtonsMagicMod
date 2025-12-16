@@ -1,21 +1,35 @@
 package com.shakyturd.ashtonsmagicmod.worldgen;
 
 import com.shakyturd.ashtonsmagicmod.AshtonsMagicMod;
+import com.shakyturd.ashtonsmagicmod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+
+import java.util.List;
 
 public class ModConfiguredFeatures {
-    // CF -> PF -> B M
+    public static final ResourceKey<ConfiguredFeature<?,?>> OVERWORLD_MANAPHITE_ORE_KEY = registerKey("manaphite_ore");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?,?>> context){
 
+        RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+        RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+
+        List<OreConfiguration.TargetBlockState> overworldManaphiteOres = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBlocks.MANAPHITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.MANAPHITE_DEEPSLATE_ORE.get().defaultBlockState()));
 
 
+        register(context, OVERWORLD_MANAPHITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldManaphiteOres, 2));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

@@ -49,6 +49,7 @@ public class AshtonsMagicMod {
 
         ModCreativeModeTabs.register(modEventBus);
 
+
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
