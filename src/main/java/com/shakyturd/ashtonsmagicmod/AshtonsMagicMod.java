@@ -1,6 +1,8 @@
 package com.shakyturd.ashtonsmagicmod;
 
 import com.shakyturd.ashtonsmagicmod.block.ModBlocks;
+import com.shakyturd.ashtonsmagicmod.component.ModDataComponents;
+import com.shakyturd.ashtonsmagicmod.datagen.DataGenerators;
 import com.shakyturd.ashtonsmagicmod.entity.ModEntities;
 import com.shakyturd.ashtonsmagicmod.entity.client.MagicProjectileRenderer;
 import com.shakyturd.ashtonsmagicmod.item.ModCreativeModeTabs;
@@ -50,9 +52,12 @@ public class AshtonsMagicMod {
         ModCreativeModeTabs.register(modEventBus);
 
 
+        ModDataComponents.register(modEventBus);
+
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+
 
 
         modEventBus.addListener(this::addCreative);
